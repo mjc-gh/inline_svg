@@ -15,15 +15,7 @@ module InlineSvg
     end
 
     def pathname
-      if ::Rails.application.config.assets.compile
-        Pathname.new(::Rails.application.assets[@filename].filename)
-      else
-        manifest = ::Rails.application.assets_manifest
-        asset_path = manifest.assets[@filename]
-        unless asset_path.nil?
-          ::Rails.root.join(manifest.directory, asset_path)
-        end
-      end
+      Rails.application.root.join('app', 'assets', 'images', @filename).to_s
     end
   end
 end
